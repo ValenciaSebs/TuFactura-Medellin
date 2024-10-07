@@ -1,0 +1,8 @@
+Perfil Admin creado:|
+--------------------|
+User: admin
+Password: 1234
+--------------------|
+
+python manage.py makemigrations facturacion
+python .\manage.py migrate
