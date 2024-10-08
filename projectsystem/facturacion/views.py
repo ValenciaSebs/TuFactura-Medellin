@@ -56,28 +56,33 @@ def nuevo_perfil_form(request):
     if request.method == "POST":
         # Procesar los datos del formulario
         correo = request.POST.get("correo")
-        nombre = request.POST.get("nombre")  
-        apellido = request.POST.get("apellido")  
-        clave = request.POST.get("clave")  
-        rol = request.POST.get("rol")  
+        nombre = request.POST.get("nombre")
+        apellido = request.POST.get("apellido")
+        clave = request.POST.get("clave")
+        rol = request.POST.get("rol")
 
-        try:
-            # Crear y guardar el nuevo perfil
-            query = Usuario(
-                correo=correo,
-                nombre=nombre,
-                apellido=apellido,
-                clave=clave,
-                rol=rol,
-            )
-            query.save()
-            # Mostrar mensaje de éxito
-            messages.success(request, "Perfil creado correctamente")
-            # Redirigir a la página de inicio de sesión
-            return redirect('login')  # Cambia esto si es necesario
+        # Verificar si el correo ya está en uso
+        if Usuario.objects.filter(correo=correo).exists():
+            # Mostrar mensaje de error si el correo ya está registrado
+            messages.error(request, "Correo Electronico ya existente.")
+        else:
+            try:
+                # Crear y guardar el nuevo perfil
+                query = Usuario(
+                    correo=correo,
+                    nombre=nombre,
+                    apellido=apellido,
+                    clave=clave,
+                    rol=rol,
+                )
+                query.save()
+                # Mostrar mensaje de éxito
+                messages.success(request, "Perfil creado correctamente")
+                # Redirigir a la página de inicio de sesión
+                return redirect('login')
 
-        except Exception as e:
-            # Mostrar mensaje de error
-            messages.error(request, f"Ocurrió un error. No se guardó el perfil: {e}")
+            except Exception as e:
+                # Mostrar mensaje de error si ocurre una excepción
+                messages.error(request, f"Ocurrió un error. No se guardó el perfil: {e}")
     
     return render(request, 'login/nuevperf_form.html')

@@ -1,0 +1,55 @@
+body { 
+    background: linear-gradient(135deg, #024800 0%, #c1ff07 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%;
+    max-width: 400px; /* Ancho máximo del formulario */
+}
+
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-control::placeholder {
+    color: #e0e0e0; 
+}
+
+.btn-primary {
+    background-color: #2cad2c; 
+    border-color: #006a15; 
+}
+
+.alert {
+    margin-bottom: 20px;
+}
+
+.image-container {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100%; 
+    overflow: hidden; 
+    border-radius: 10%;
+}
+
+.image-container img {
+    max-width: 100%; 
+    max-height: 100%; 
+    object-fit: contain; 
+    border: 5px solid #024800; /* Borde verde oscuro */
+    border-radius: 15px; /* Esquinas redondeadas */
+}
