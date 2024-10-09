@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+
+from .admin import ContratoForm
 from .models import * #Importa todo lo que haya en el modelo (mas facil)
 from django.contrib import messages
 
@@ -11,6 +13,24 @@ def index(request):
     else: 
         messages.warning(request, "Por favor inicie sesion ...")
         return redirect ("login")
+    
+#Nuevo contrato
+def nuevo_contrato(request):
+    if request.method == 'POST':
+        form = ContratoForm(request.POST)
+        if form.is_valid():
+            contrato = form.save(commit=False)
+            contrato.confidencialidad = 'confidencialidad' in request.POST
+            contrato.save()
+            messages.success(request, "Contrato guardado exitosamente.")
+            return redirect('index')
+    else:
+        form = ContratoForm() 
+        
+    if request.method == 'POST':
+        print(form.errors)
+
+    return render(request, 'nuevo_contrato/nuevo_contrato.html', {'form': form})
 
 
 #Ingresar al sistema
