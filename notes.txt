@@ -6,3 +6,10 @@ Password: 1234
 
 python manage.py makemigrations facturacion
 python .\manage.py migrate
+
+
+git init
+git add .
+git commit -m "Descripcion"
+git log --oneline
+git push
